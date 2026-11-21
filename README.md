@@ -22,31 +22,41 @@ Los comandos son para PowerShell, una línea cada uno.
 
 ### Paso 1. Clonar el repositorio
 
-&#x20;   git clone https://github.com/mtrujillov-sys/Proyecto_De_AdministracionBD_Grupo07.git
-&#x20;   cd Proyecto_De_AdministracionBD_Grupo07
+```
+git clone https://github.com/mtrujillov-sys/Proyecto_De_AdministracionBD_Grupo07.git
+cd Proyecto_De_AdministracionBD_Grupo07
+```
 
 ### Paso 2. Iniciar PostgreSQL con Docker
 
 Cambiar USUARIO y CLAVE por los propios:
 
-&#x20;   docker run --name postgres_abd -e POSTGRES_USER=USUARIO -e POSTGRES_PASSWORD=CLAVE -p 5432:5432 -d postgres
+```
+docker run --name postgres_abd -e POSTGRES_USER=USUARIO -e POSTGRES_PASSWORD=CLAVE -p 5432:5432 -d postgres
+```
 
 Si el contenedor ya existe, solo se inicia con:
 
-&#x20;   docker start postgres_abd
+```
+docker start postgres_abd
+```
 
 ### Paso 3. Crear la base de datos
 
 El nombre lleva mayúscula:
 
-&#x20;   docker exec -it postgres_abd createdb -U USUARIO repositorioTutorias
+```
+docker exec -it postgres_abd createdb -U USUARIO repositorioTutorias
+```
 
 ### Paso 4. Ejecutar los scripts SQL en este orden
 
-&#x20;   Get-Content sql\\00_base.sql -Raw | docker exec -i postgres_abd psql -U USUARIO -d repositorioTutorias
-&#x20;   Get-Content sql\\rf01.sql -Raw | docker exec -i postgres_abd psql -U USUARIO -d repositorioTutorias
-&#x20;   Get-Content sql\\rf02.sql -Raw | docker exec -i postgres_abd psql -U USUARIO -d repositorioTutorias
-&#x20;   Get-Content sql\\rf03.sql -Raw | docker exec -i postgres_abd psql -U USUARIO -d repositorioTutorias
+```
+Get-Content sql\00_base.sql -Raw | docker exec -i postgres_abd psql -U USUARIO -d repositorioTutorias
+Get-Content sql\rf01.sql -Raw | docker exec -i postgres_abd psql -U USUARIO -d repositorioTutorias
+Get-Content sql\rf02.sql -Raw | docker exec -i postgres_abd psql -U USUARIO -d repositorioTutorias
+Get-Content sql\rf03.sql -Raw | docker exec -i postgres_abd psql -U USUARIO -d repositorioTutorias
+```
 
 El orden es obligatorio: rf03.sql usa tablas creadas en rf01.sql y rf02.sql.
 
@@ -54,12 +64,16 @@ El orden es obligatorio: rf03.sql usa tablas creadas en rf01.sql y rf02.sql.
 
 La clave no se sube a GitHub:
 
-&#x20;   dotnet user-secrets set "ConnectionStrings:Postgres" "Host=localhost;Port=5432;Database=repositorioTutorias;Username=USUARIO;Password=CLAVE" --project app
+```
+dotnet user-secrets set "ConnectionStrings:Postgres" "Host=localhost;Port=5432;Database=repositorioTutorias;Username=USUARIO;Password=CLAVE" --project app
+```
 
 ### Paso 6. Ejecutar la aplicación
 
-&#x20;   cd app
-&#x20;   dotnet run
+```
+cd app
+dotnet run
+```
 
 ### Paso 7. Abrir el navegador
 
