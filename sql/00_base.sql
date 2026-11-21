@@ -1,0 +1,1 @@
+/* 00_base.sql: base compartida. La base repositorioTutorias se crea antes (ver README). */ CREATE TABLE IF NOT EXISTS rol (id_rol INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY, nombre VARCHAR(50) NOT NULL UNIQUE); INSERT INTO rol (nombre) VALUES ('administrador general'), ('coordinador de carrera'), ('coordinador de area'), ('tutor') ON CONFLICT (nombre) DO NOTHING;
