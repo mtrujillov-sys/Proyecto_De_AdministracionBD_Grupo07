@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<RepositorioTutorias.Data.Db>();
 
 var app = builder.Build();
 
@@ -27,3 +28,4 @@ app.MapControllerRoute(
 
 
 app.Run();
+
