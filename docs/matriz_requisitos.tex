@@ -46,10 +46,12 @@ usuario con documentos, que depende de RF-03. &
 Tabla~\ref{tab:pruebas-rf02}: 6 pruebas y 11 capturas \ev{RF02\_*.png} en
 \texttt{evidencias/}. \\
 \addlinespace
-RF-03 & Documentos: subir y consultar & En desarrollo &
+RF-03 & Documentos: subir y consultar & Completado &
 Subir documentos en PDF o DOCX, consultarlos con filtros por periodo, categoría y carrera
-con paginación, editar, eliminar y descargar. &
-Ver las pruebas y capturas de RF-03. \\
+con paginación, editar, eliminar y abrir el archivo desde la lista. Validaciones de tipo de
+archivo, tamaño máximo, periodo abierto y categoría habilitada para el periodo. &
+4 pruebas con 6 capturas \ev{RF03\_*.png} en \texttt{evidencias/}; por ejemplo
+\ev{RF03\_subir\_documento.png} y \ev{RF03\_error\_archivo\_no\_permitido.png}. \\
 \bottomrule
 \end{longtable}
 \endgroup
@@ -81,16 +83,20 @@ Consultar y modificar ya están en RF-02. Falta la opción de desactivar. \\
 RF-04 & Registrar y modificar asignaturas & Reemplazado &
 Las asignaturas se reemplazan por periodos, categorías documentales y carreras (RF-01 y
 RF-02). \\
-RF-05 & Cargar archivos de tutorías & En desarrollo & Cubierto por RF-03. \\
-RF-06 & Clasificar cada recurso & En desarrollo &
+RF-05 & Cargar archivos de tutorías & Completado & Cubierto por RF-03. \\
+RF-06 & Clasificar cada recurso & Completado &
 Cubierto por RF-03. Ahora se clasifica por periodo, categoría y carrera, no por asignatura
 y tema. \\
 RF-07 & Buscar recursos por palabra clave & Pendiente &
 RF-03 filtra por periodo, categoría y carrera, pero no por palabra clave. \\
-RF-08 & Visualizar recursos sin descargarlos & En desarrollo & Cubierto por RF-03. \\
-RF-09 & Descargar recursos & En desarrollo & Cubierto por RF-03. \\
-RF-10 & Editar los datos de los recursos & En desarrollo & Cubierto por RF-03. \\
-RF-11 & Eliminar recursos & En desarrollo & Cubierto por RF-03. \\
+RF-08 & Visualizar recursos sin descargarlos & Completado &
+Cubierto por RF-03. Desde la lista, el PDF se abre en una pestaña nueva. \\
+RF-09 & Descargar recursos & Completado &
+Cubierto por RF-03. El archivo se obtiene desde su enlace en la lista. \\
+RF-10 & Editar los datos de los recursos & Completado &
+Cubierto por RF-03. Prueba: \ev{RF03\_editar\_documento.png}. \\
+RF-11 & Eliminar recursos & Completado &
+Cubierto por RF-03. Pide confirmación y elimina también el archivo guardado. \\
 RF-12 & Restringir operaciones según el rol & Pendiente &
 Depende del inicio de sesión, que se deja para una versión posterior. \\
 RF-13 & Detectar archivos repetidos & Pendiente & No se implementó en esta versión. \\
