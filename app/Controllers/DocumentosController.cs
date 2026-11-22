@@ -60,7 +60,7 @@ public class DocumentosController : Controller
         ViewBag.Periodos = await _db.ConsultarAsync("SELECT id_periodo, nombre FROM periodo ORDER BY nombre", Item);
         ViewBag.Categorias = await _db.ConsultarAsync("SELECT id_categoria, nombre FROM categoria_documental ORDER BY nombre", Item);
         ViewBag.Carreras = await _db.ConsultarAsync("SELECT id_carrera, nombre FROM carrera ORDER BY nombre", Item);
-        ViewBag.Tutores = await _db.ConsultarAsync("SELECT id_usuario, nombre FROM usuario ORDER BY nombre", Item);
+        ViewBag.Tutores = await _db.ConsultarAsync( "SELECT id_usuario, nombres FROM usuario WHERE id_rol = (SELECT id_rol FROM rol WHERE nombre = 'tutor') ORDER BY nombres", Item);
     }
 
     // Reglas: periodo ACTIVO y categoria habilitada para ese periodo
