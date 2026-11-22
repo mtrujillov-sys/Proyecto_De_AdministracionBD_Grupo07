@@ -1,0 +1,91 @@
+% =====================================================================
+% Pruebas funcionales de RF-02 (Facultades, carreras y usuarios) - Kamila
+% FRAGMENTO para el informe: \input{rf02_tabla_pruebas}
+% Paquetes: booktabs, longtable, array. Las capturas estan en la carpeta evidencias/.
+% =====================================================================
+
+\providecommand{\evus}{\textunderscore\allowbreak}
+\providecommand{\ev}[1]{{\texttt{\scriptsize\let\_\evus #1}}}
+
+\subsection{Pruebas funcionales de RF-02: facultades, carreras y usuarios}
+
+Cada prueba se hizo desde la aplicación y después se comprobó en PostgreSQL con una
+consulta, para confirmar que lo que se vio en pantalla coincide con lo guardado en la base
+de datos. Las capturas están en la carpeta \texttt{evidencias/} del repositorio.
+
+\begingroup\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{1.8cm}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{3.2cm}}
+\caption{Pruebas funcionales de RF-02}\label{tab:pruebas-rf02}\\
+\toprule
+\textbf{Requisito} & \textbf{Prueba} & \textbf{Datos usados} & \textbf{Resultado esperado} & \textbf{Resultado obtenido} & \textbf{Evidencia} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Requisito} & \textbf{Prueba} & \textbf{Datos usados} & \textbf{Resultado esperado} & \textbf{Resultado obtenido} & \textbf{Evidencia} \\
+\midrule
+\endhead
+RF-02 & Crear facultad &
+Nombre: Facultad de Ciencias de la Ingeniería; activa. &
+Se guarda y aparece en la lista con el mensaje ``Facultad creada''. &
+Apareció el mensaje y la facultad en la lista. En PostgreSQL, \texttt{facultad} tiene la fila con \texttt{id\_facultad = 1}. &
+\ev{RF02\_crear\_facultad.png}\newline
+\ev{RF02\_crear\_facultad\_sql.png} \\
+\addlinespace
+RF-02 & Crear carrera &
+Nombre: Ingeniería de Software; facultad elegida de la lista. &
+Se guarda asociada a su facultad, con el mensaje ``Carrera creada''. &
+Apareció el mensaje y la carrera junto a su facultad. En PostgreSQL, la consulta con \texttt{JOIN} muestra la carrera con su facultad. &
+\ev{RF02\_crear\_carrera.png}\newline
+\ev{RF02\_crear\_carrera\_sql.png} \\
+\addlinespace
+RF-02 & Crear usuario tutor &
+Nombres: Tutor Prueba Uno; correo: tutor1@uteq.edu.ec; rol: tutor; carrera: Ingeniería de Software. &
+Se guarda con su rol y carrera, con el mensaje ``Usuario creado''. &
+Apareció el mensaje y el usuario en la lista. En PostgreSQL, \texttt{usuario} muestra el tutor con su rol y su carrera. &
+\ev{RF02\_crear\_usuario\_tutor.png}\newline
+\ev{RF02\_crear\_usuario\_tutor\_sql.png} \\
+\addlinespace
+RF-02 & Error: correo repetido &
+Nombres: Tutor Prueba Uno; correo: tutor1@uteq.edu.ec (ya registrado); rol: tutor; misma carrera. &
+No se guarda y se muestra ``Ya existe un usuario con ese correo''. &
+El sistema rechazó el registro y mostró el mensaje bajo el campo Correo. En PostgreSQL, el correo aparece una sola vez. &
+\ev{RF02\_error\_correo\_repetido.png}\newline
+\ev{RF02\_error\_correo\_repetido\_sql.png} \\
+\addlinespace
+RF-02 & Error: eliminar facultad con carreras &
+Facultad de Ciencias de la Ingeniería, que tiene 1 carrera asociada. &
+No se elimina y se muestra ``No se puede eliminar: la facultad tiene carreras asociadas''. &
+El sistema mostró el mensaje y la facultad siguió en la lista. En PostgreSQL, la facultad sigue con 1 carrera. &
+\ev{RF02\_error\_eliminar\_facultad.png}\newline
+\ev{RF02\_error\_eliminar\_facultad\_sql.png} \\
+\addlinespace
+RF-02 & Error: tutor sin carrera &
+Nombres: Tutor Sin Carrera; correo: tutor3@uteq.edu.ec; rol: tutor; sin carrera. &
+No se guarda y se muestra ``Solo el administrador general puede no tener carrera''. &
+El sistema rechazó el registro y mostró el mensaje bajo el campo Carrera. &
+\ev{RF02\_error\_tutor\_sin\_carrera.png} \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+Las consultas usadas para comprobar los datos en PostgreSQL fueron:
+
+\begingroup\sloppy\raggedright
+\begin{itemize}[leftmargin=1.2cm]
+  \item \ev{SELECT * FROM facultad;}
+  \item \ev{SELECT c.id\_carrera, c.nombre, f.nombre AS facultad FROM carrera c JOIN
+        facultad f ON f.id\_facultad = c.id\_facultad;}
+  \item \ev{SELECT u.id\_usuario, u.nombres, u.correo, r.nombre AS rol, c.nombre AS
+        carrera FROM usuario u JOIN rol r ON r.id\_rol = u.id\_rol LEFT JOIN carrera c ON
+        c.id\_carrera = u.id\_carrera;}
+  \item \ev{SELECT correo, COUNT(*) AS veces FROM usuario GROUP BY correo;}
+  \item \ev{SELECT f.id\_facultad, f.nombre, COUNT(c.id\_carrera) AS carreras FROM
+        facultad f LEFT JOIN carrera c ON c.id\_facultad = f.id\_facultad GROUP BY
+        f.id\_facultad, f.nombre;}
+\end{itemize}
+\endgroup
+
+La prueba de que no se puede eliminar un usuario que tiene documentos queda pendiente
+hasta que el módulo de documentos (RF-03) esté unido a la rama principal, porque depende
+de la tabla \texttt{documento}.
