@@ -106,3 +106,11 @@ Prueba de conexión con la base: /Prueba/Roles
 - Todas las consultas usan parámetros. Nunca se arma el SQL pegando texto del usuario.
 - Las claves se guardan con dotnet user-secrets y no se suben al repositorio.
 - Las claves foráneas usan ON DELETE RESTRICT para no borrar datos que están en uso.
+
+## Datos de prueba masivos (opcional)
+
+Para probar el rendimiento con 200 000 documentos ficticios, ejecutar después de rf03.sql:
+
+    Get-Content sql\datos_masivos.sql -Raw | docker exec -i postgres_abd psql -v ON_ERROR_STOP=1 -U USUARIO -d repositorioTutorias
+
+Los datos llevan el prefijo MASIVO. Es una prueba de diseño: los archivos no existen físicamente.
