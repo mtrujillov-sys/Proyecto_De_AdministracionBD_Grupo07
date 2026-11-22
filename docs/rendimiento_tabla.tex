@@ -1,11 +1,11 @@
-﻿\begin{table}[H]
+\begin{table}[H]
 \centering
 \caption{Tiempos de ejecución con 200{,}000 documentos (EXPLAIN ANALYZE)}
-\begin{tabular}{|l|r|r|r|}
+\begin{tabular}{|l|r|r|r|r|}
 \hline
-\textbf{Consulta} & \textbf{Sin índices (ms)} & \textbf{Con índices (ms)} & \textbf{Mejora} \\ \hline
-Conteo total & 61.390 & 32.472 & 1.9$\times$ \\ \hline
-Filtro por carrera & 76.140 & 18.138 & 4.2$\times$ \\ \hline
-Filtro por periodo y categoría & 16.565 & 0.033 & $\approx$500$\times$ \\ \hline
+\textbf{Consulta} & \textbf{Filas} & \textbf{Sin índices (ms)} & \textbf{Con índices (ms)} & \textbf{Mejora} \\ \hline
+Conteo total & 1 & 32.175 & 27.064 & 1.2$\times$ \\ \hline
+Filtro por carrera & 20{,}000 & 49.460 & 14.548 & 3.4$\times$ \\ \hline
+Filtro por periodo y categoría & 2{,}502 & 22.062 & 3.149 & 7.0$\times$ \\ \hline
 \end{tabular}
 \end{table}
