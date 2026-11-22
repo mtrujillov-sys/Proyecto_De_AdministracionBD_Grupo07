@@ -1,0 +1,80 @@
+@model List<RepositorioTutorias.Models.Documento>
+    @using Microsoft.AspNetCore.Mvc.Rendering
+    @{ ViewData["Title"] = "Documentos"; }
+    <h2>Documentos</h2>
+    @if (TempData["Ok"] != null) { <div class="alert alert-success">@TempData["Ok"]</div> }
+    @if (TempData["Error"] != null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+
+    <a class="btn btn-primary mb-3" asp-action="Crear">Subir documento</a>
+
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-md-3">
+            <select name="periodo" class="form-select"
+                    asp-items="@(new SelectList((List<SelectListItem>)ViewBag.Periodos, "Value", "Text", ViewBag.Periodo))">
+                <option value="">Todos los periodos</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select name="categoria" class="form-select"
+                    asp-items="@(new SelectList((List<SelectListItem>)ViewBag.Categorias, "Value", "Text", ViewBag.Categoria))">
+                <option value="">Todas las categorias</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select name="carrera" class="form-select"
+                    asp-items="@(new SelectList((List<SelectListItem>)ViewBag.Carreras, "Value", "Text", ViewBag.Carrera))">
+                <option value="">Todas las carreras</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-secondary">Filtrar</button>
+            <a class="btn btn-outline-secondary" asp-action="Index">Limpiar</a>
+        </div>
+    </form>
+
+    <p class="text-muted">@ViewBag.Total documento(s) - Pagina @ViewBag.Pagina de @ViewBag.TotalPaginas</p>
+
+    <table class="table table-striped">
+        <thead>
+            <tr><th>Titulo</th><th>Archivo</th><th>Periodo</th><th>Categoria</th><th>Carrera</th><th>Fecha</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var d in Model)
+    {
+            <tr>
+                <td>@d.Titulo</td>
+                <td><a href="~/@d.RutaArchivo" target="_blank">@d.NombreArchivo</a> (@d.TipoArchivo)</td>
+                <td>@d.NombrePeriodo</td>
+                <td>@d.NombreCategoria</td>
+                <td>@d.NombreCarrera</td>
+                <td>@d.FechaSubida.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-secondary" asp-action="Editar" asp-route-id="@d.IdDocumento">Editar</a>
+                    <form asp-action="Eliminar" method="post" class="d-inline" onsubmit="return confirm('Eliminar este documento?');">
+                        <input type="hidden" name="id" value="@d.IdDocumento" />
+                        <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            @{
+            int pag = (int)ViewBag.Pagina;
+            int tot = (int)ViewBag.TotalPaginas;
+            }
+            <li class="page-item @(pag <= 1 ? "disabled" : "")">
+                <a class="page-link" asp-action="Index"
+                   asp-route-pagina="@(pag - 1)" asp-route-periodo="@ViewBag.Periodo"
+                   asp-route-categoria="@ViewBag.Categoria" asp-route-carrera="@ViewBag.Carrera">Anterior</a>
+            </li>
+            <li class="page-item @(pag >= tot ? "disabled" : "")">
+                <a class="page-link" asp-action="Index"
+                   asp-route-pagina="@(pag + 1)" asp-route-periodo="@ViewBag.Periodo"
+                   asp-route-categoria="@ViewBag.Categoria" asp-route-carrera="@ViewBag.Carrera">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
