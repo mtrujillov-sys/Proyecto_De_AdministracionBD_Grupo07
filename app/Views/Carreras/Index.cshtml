@@ -1,0 +1,26 @@
+@model List<RepositorioTutorias.Models.Carrera>
+@{ ViewData["Title"] = "Carreras"; }
+<h2>Carreras</h2>
+@if (TempData["Ok"] != null) { <div class="alert alert-success">@TempData["Ok"]</div> }
+@if (TempData["Error"] != null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+<a class="btn btn-primary mb-3" asp-action="Crear">Nueva carrera</a>
+<table class="table table-striped">
+    <thead><tr><th>Facultad</th><th>Carrera</th><th>Activa</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.FacultadNombre</td>
+            <td>@c.Nombre</td>
+            <td>@(c.Activa ? "Si" : "No")</td>
+            <td>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Editar" asp-route-id="@c.IdCarrera">Editar</a>
+                <form asp-action="Eliminar" method="post" class="d-inline" onsubmit="return confirm('Eliminar esta carrera?');">
+                    <input type="hidden" name="id" value="@c.IdCarrera" />
+                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

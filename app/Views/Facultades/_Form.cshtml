@@ -1,0 +1,16 @@
+@model RepositorioTutorias.Models.Facultad
+<form method="post">
+    <input type="hidden" asp-for="IdFacultad" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label">Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+    <div class="form-check mb-3">
+        <input asp-for="Activa" class="form-check-input" />
+        <label asp-for="Activa" class="form-check-label">Activa</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-link" asp-action="Index">Cancelar</a>
+</form>

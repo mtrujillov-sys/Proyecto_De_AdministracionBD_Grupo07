@@ -1,0 +1,27 @@
+@model List<RepositorioTutorias.Models.Usuario>
+@{ ViewData["Title"] = "Usuarios"; }
+<h2>Usuarios</h2>
+@if (TempData["Ok"] != null) { <div class="alert alert-success">@TempData["Ok"]</div> }
+@if (TempData["Error"] != null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+<a class="btn btn-primary mb-3" asp-action="Crear">Nuevo usuario</a>
+<table class="table table-striped">
+    <thead><tr><th>Nombres</th><th>Correo</th><th>Rol</th><th>Carrera</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.Nombres</td>
+            <td>@u.Correo</td>
+            <td>@u.RolNombre</td>
+            <td>@(u.CarreraNombre ?? "-")</td>
+            <td>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Editar" asp-route-id="@u.IdUsuario">Editar</a>
+                <form asp-action="Eliminar" method="post" class="d-inline" onsubmit="return confirm('Eliminar este usuario?');">
+                    <input type="hidden" name="id" value="@u.IdUsuario" />
+                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
