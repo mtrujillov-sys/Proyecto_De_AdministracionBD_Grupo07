@@ -1,0 +1,115 @@
+% =====================================================================
+% Pruebas funcionales de RF-01 (Periodos y categorias documentales) - Roselyn
+% FRAGMENTO para el informe: \input{rf01_tabla_pruebas}
+% Paquetes: booktabs, longtable, array. Las capturas estan en la carpeta evidencias/.
+% =====================================================================
+
+\providecommand{\evus}{\textunderscore\allowbreak}
+\providecommand{\ev}[1]{{\texttt{\scriptsize\let\_\evus #1}}}
+
+\subsection{Pruebas funcionales de RF-01: periodos y categorías documentales}
+
+Cada prueba se hizo desde la aplicación y después se comprobó en PostgreSQL con una
+consulta, para confirmar que lo que se vio en pantalla coincide con lo guardado en la base
+de datos. Las capturas están en la carpeta \texttt{evidencias/} del repositorio.
+
+\begingroup\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{1.8cm}>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{3.2cm}}
+\caption{Pruebas funcionales de RF-01}\label{tab:pruebas-rf01}\\
+\toprule
+\textbf{Requisito} & \textbf{Prueba} & \textbf{Datos usados} & \textbf{Resultado esperado} & \textbf{Resultado obtenido} & \textbf{Evidencia} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Requisito} & \textbf{Prueba} & \textbf{Datos usados} & \textbf{Resultado esperado} & \textbf{Resultado obtenido} & \textbf{Evidencia} \\
+\midrule
+\endhead
+RF-01 & Crear categoría &
+Nombre: Plan de acción inicial; activa. &
+Se guarda y aparece en la lista con el mensaje ``Categoria creada''. &
+Apareció el mensaje y la categoría en la lista. &
+\ev{RF01\_categoria\_crear.png} \\
+\addlinespace
+RF-01 & Categoría repetida &
+Nombre igual al de una categoría existente. &
+Mensaje de error y no se guarda. &
+Mostró ``Ya existe una categoria con ese nombre'' y no guardó. &
+\ev{RF01\_categoria\_nombre\_repetido\_error.png} \\
+\addlinespace
+RF-01 & Categoría sin nombre &
+Nombre vacío. &
+Mensaje de error y no se guarda. &
+Mostró ``El nombre es obligatorio'' y no guardó. &
+\ev{RF01\_categoria\_nombre\_vacio\_error.png} \\
+\addlinespace
+RF-01 & Editar categoría &
+Cambio de la descripción de una categoría. &
+Se actualiza con el mensaje ``Categoria actualizada''. &
+Se actualizó y apareció el mensaje. &
+\ev{RF01\_categoria\_editar.png} \\
+\addlinespace
+RF-01 & Eliminar categoría &
+Categoría que no está en uso. &
+Se elimina con el mensaje ``Categoria eliminada''. &
+Se eliminó y apareció el mensaje. &
+\ev{RF01\_categoria\_eliminar.png} \\
+\addlinespace
+RF-01 & Crear periodo &
+Nombre: 2026-2027 CI; fechas válidas; tres categorías marcadas. &
+Se guarda con sus categorías y aparece en la lista con el mensaje ``Periodo creado''. &
+Apareció el mensaje y el periodo en la lista con tres categorías. &
+\ev{RF01\_crear\_periodo.png} \\
+\addlinespace
+RF-01 & Reutilizar categorías &
+Periodo nuevo con las categorías del periodo anterior marcadas y una desmarcada. &
+Se guarda solo con las categorías marcadas. &
+Se guardó con las categorías elegidas. En PostgreSQL, \texttt{periodo\_categoria} muestra solo esas asignaciones. &
+\ev{RF01\_reutilizar\_categorias.png}\newline
+\ev{RF01\_reutilizar\_categorias\_lista.png}\newline
+\ev{RF01\_reutilizar\_categorias\_postgres.png} \\
+\addlinespace
+RF-01 & Periodo con categoría nueva &
+Periodo nuevo y una categoría nueva escrita en el campo de categorías nuevas. &
+Se crea la categoría y queda asignada al periodo. &
+La categoría nueva se creó y quedó asignada al periodo. &
+\ev{RF01\_periodo\_crear\_con\_categoria\_nueva.png} \\
+\addlinespace
+RF-01 & Fechas inválidas &
+Fecha de fin anterior a la fecha de inicio. &
+Mensaje de error y no se guarda. &
+Mostró el mensaje de fecha de fin posterior a la de inicio y no guardó. &
+\ev{RF01\_fechas\_error.png} \\
+\addlinespace
+RF-01 & Periodo repetido &
+Nombre de un periodo que ya existe. &
+Mensaje de error y no se guarda. &
+Mostró ``Ya existe un periodo con ese nombre'' y no guardó. &
+\ev{RF01\_periodo\_nombre\_repetido\_error.png} \\
+\addlinespace
+RF-01 & Editar periodo &
+Cambio de nombre o de fechas. &
+Se actualiza con el mensaje ``Periodo actualizado''. &
+Se actualizó y apareció el mensaje. &
+\ev{RF01\_periodo\_editar.png} \\
+\addlinespace
+RF-01 & Cerrar periodo &
+Periodo en estado ACTIVO. &
+El estado cambia a CERRADO. &
+El estado cambió a CERRADO. &
+\ev{RF01\_periodo\_cerrar.png} \\
+\addlinespace
+RF-01 & Eliminar periodo &
+Periodo de prueba. &
+Se elimina con el mensaje ``Periodo eliminado''. &
+Se eliminó y apareció el mensaje. &
+\ev{RF01\_periodo\_eliminar.png} \\
+\addlinespace
+RF-01 & Verificación en PostgreSQL &
+Consulta con \texttt{JOIN} entre \texttt{periodo}, \texttt{periodo\_categoria} y \texttt{categoria\_documental}. &
+Los datos de la base coinciden con lo hecho en la aplicación. &
+Los registros coincidieron con lo hecho en la aplicación. &
+\ev{RF01\_verificacion\_postgres\_periodo\_categoria.png} \\
+\bottomrule
+\end{longtable}
+\endgroup
