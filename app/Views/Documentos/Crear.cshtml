@@ -1,0 +1,15 @@
+@model RepositorioTutorias.Models.Documento
+@{ ViewData["Title"] = "Subir documento"; }
+<h2>Subir documento</h2>
+<form asp-action="Crear" method="post" enctype="multipart/form-data">
+    <partial name="_Form" model="Model" />
+    <div class="mb-3">
+        <label class="form-label">Archivo (PDF o DOCX, maximo 10 MB)</label>
+        <input type="file" name="archivo" class="form-control" accept=".pdf,.docx" />
+        <span class="text-danger" data-valmsg-for="archivo">
+            @Html.ValidationMessage("archivo")
+        </span>
+    </div>
+    <button class="btn btn-primary">Subir</button>
+    <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a>
+</form>

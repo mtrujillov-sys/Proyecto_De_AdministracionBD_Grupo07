@@ -1,0 +1,45 @@
+@model RepositorioTutorias.Models.Documento
+@using Microsoft.AspNetCore.Mvc.Rendering
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="Titulo" class="form-label">Titulo</label>
+    <input asp-for="Titulo" class="form-control" />
+    <span asp-validation-for="Titulo" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="IdUsuario" class="form-label">Tutor</label>
+    <select asp-for="IdUsuario" class="form-select"
+            asp-items="@((List<SelectListItem>)ViewBag.Tutores)">
+        <option value="0">-- Seleccione --</option>
+    </select>
+    <span asp-validation-for="IdUsuario" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="IdPeriodo" class="form-label">Periodo</label>
+    <select asp-for="IdPeriodo" class="form-select"
+            asp-items="@((List<SelectListItem>)ViewBag.Periodos)">
+        <option value="0">-- Seleccione --</option>
+    </select>
+    <span asp-validation-for="IdPeriodo" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="IdCategoria" class="form-label">Categoria</label>
+    <select asp-for="IdCategoria" class="form-select"
+            asp-items="@((List<SelectListItem>)ViewBag.Categorias)">
+        <option value="0">-- Seleccione --</option>
+    </select>
+    <span asp-validation-for="IdCategoria" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="IdCarrera" class="form-label">Carrera</label>
+    <select asp-for="IdCarrera" class="form-select"
+            asp-items="@((List<SelectListItem>)ViewBag.Carreras)">
+        <option value="0">-- Seleccione --</option>
+    </select>
+    <span asp-validation-for="IdCarrera" class="text-danger"></span>
+</div>
