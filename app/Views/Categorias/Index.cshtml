@@ -1,0 +1,26 @@
+@model List<RepositorioTutorias.Models.Categoria>
+@{ ViewData["Title"] = "Categorias documentales"; }
+<h2>Categorias documentales</h2>
+@if (TempData["Ok"] != null) { <div class="alert alert-success">@TempData["Ok"]</div> }
+@if (TempData["Error"] != null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+<a class="btn btn-primary mb-3" asp-action="Crear">Nueva categoria</a>
+<table class="table table-striped">
+    <thead><tr><th>Nombre</th><th>Descripcion</th><th>Activa</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.Nombre</td>
+            <td>@c.Descripcion</td>
+            <td>@(c.Activa ? "Si" : "No")</td>
+            <td>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Editar" asp-route-id="@c.IdCategoria">Editar</a>
+                <form asp-action="Eliminar" method="post" class="d-inline" onsubmit="return confirm('Eliminar esta categoria?');">
+                    <input type="hidden" name="id" value="@c.IdCategoria" />
+                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

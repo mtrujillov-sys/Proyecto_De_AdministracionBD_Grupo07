@@ -1,0 +1,35 @@
+@model List<RepositorioTutorias.Models.PeriodoFila>
+@{ ViewData["Title"] = "Periodos"; }
+<h2>Periodos</h2>
+@if (TempData["Ok"] != null) { <div class="alert alert-success">@TempData["Ok"]</div> }
+@if (TempData["Error"] != null) { <div class="alert alert-danger">@TempData["Error"]</div> }
+<a class="btn btn-primary mb-3" asp-action="Crear">Nuevo periodo</a>
+<table class="table table-striped">
+    <thead><tr><th>Nombre</th><th>Inicio</th><th>Fin</th><th>Estado</th><th>Categorias</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.Nombre</td>
+            <td>@p.FechaInicio.ToString("yyyy-MM-dd")</td>
+            <td>@p.FechaFin.ToString("yyyy-MM-dd")</td>
+            <td>@p.Estado</td>
+            <td>@p.NumCategorias</td>
+            <td>
+                <a class="btn btn-sm btn-outline-secondary" asp-action="Editar" asp-route-id="@p.IdPeriodo">Editar</a>
+                @if (p.Estado == "ACTIVO")
+                {
+                    <form asp-action="Cerrar" method="post" class="d-inline" onsubmit="return confirm('Cerrar este periodo?');">
+                        <input type="hidden" name="id" value="@p.IdPeriodo" />
+                        <button class="btn btn-sm btn-outline-warning">Cerrar</button>
+                    </form>
+                }
+                <form asp-action="Eliminar" method="post" class="d-inline" onsubmit="return confirm('Eliminar este periodo?');">
+                    <input type="hidden" name="id" value="@p.IdPeriodo" />
+                    <button class="btn btn-sm btn-outline-danger">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
