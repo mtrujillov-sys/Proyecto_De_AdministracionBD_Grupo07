@@ -1,0 +1,111 @@
+% =====================================================================
+% Matriz de requisitos consolidada - Kamila
+% FRAGMENTO para el informe: \input{matriz_requisitos}
+% Paquetes: booktabs, longtable, array.
+% Estados permitidos: Completado, En desarrollo, Pendiente.
+% =====================================================================
+
+\providecommand{\evus}{\textunderscore\allowbreak}
+\providecommand{\ev}[1]{{\texttt{\scriptsize\let\_\evus #1}}}
+
+\section{Matriz de requisitos consolidada}
+
+La matriz recoge el estado de los requisitos al cierre de esta entrega. Se presenta en dos
+partes. La Tabla~\ref{tab:matriz-equipo} muestra los tres módulos que implementó el equipo,
+con su numeración RF-01, RF-02 y RF-03. La Tabla~\ref{tab:matriz-sem2} recorre los
+requisitos de la propuesta de la semana 2, que usaban otra numeración, e indica el estado de
+cada uno y cuál módulo lo cubre. Los estados son completado, en desarrollo o pendiente.
+
+\subsection{Módulos implementados por el equipo}
+
+\begingroup\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.9cm}}
+\caption{Estado de los módulos implementados (RF-01 a RF-03)}\label{tab:matriz-equipo}\\
+\toprule
+\textbf{ID} & \textbf{Requisito} & \textbf{Estado} & \textbf{Funcionalidad} & \textbf{Evidencia} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Requisito} & \textbf{Estado} & \textbf{Funcionalidad} & \textbf{Evidencia} \\
+\midrule
+\endhead
+RF-01 & Periodos y categorías documentales & Completado &
+CRUD de periodos y de categorías, con reutilización de categorías de periodos anteriores
+al crear un periodo nuevo y validaciones de nombre y de fechas. Falta la prueba de no
+eliminar una categoría con documentos, que depende de RF-03. &
+16 capturas \ev{RF01\_*.png} en \texttt{evidencias/}; por ejemplo
+\ev{RF01\_crear\_periodo.png}, \ev{RF01\_fechas\_error.png} y
+\ev{RF01\_reutilizar\_categorias.png}. \\
+\addlinespace
+RF-02 & Facultades, carreras y usuarios & Completado &
+CRUD de facultades, carreras (con facultad) y usuarios (con rol y carrera). Validaciones de
+nombre único, correo válido y único, carrera obligatoria salvo para el administrador
+general y bloqueo al eliminar una facultad con carreras. Falta la prueba de no eliminar un
+usuario con documentos, que depende de RF-03. &
+Tabla~\ref{tab:pruebas-rf02}: 6 pruebas y 11 capturas \ev{RF02\_*.png} en
+\texttt{evidencias/}. \\
+\addlinespace
+RF-03 & Documentos: subir y consultar & En desarrollo &
+Subir documentos en PDF o DOCX, consultarlos con filtros por periodo, categoría y carrera
+con paginación, editar, eliminar y descargar. &
+Ver las pruebas y capturas de RF-03. \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection{Requisitos de la propuesta de la semana 2}
+
+Los identificadores de esta tabla son los del informe de la semana 2 y no corresponden a
+RF-01, RF-02 ni RF-03 de los módulos anteriores.
+
+\begingroup\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{7.0cm}}
+\caption{Estado de los requisitos de la propuesta de la semana 2}\label{tab:matriz-sem2}\\
+\toprule
+\textbf{ID} & \textbf{Requisito} & \textbf{Estado} & \textbf{Cobertura u observación} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Requisito} & \textbf{Estado} & \textbf{Cobertura u observación} \\
+\midrule
+\endhead
+RF-01 & Registrar usuarios y asignarles un rol & Completado &
+Cubierto por RF-02. Ahora son cuatro roles (administrador general, coordinador de carrera,
+coordinador de área y tutor). \\
+RF-02 & Iniciar sesión con usuario y contraseña & Pendiente &
+Se deja para una versión posterior. Por ahora solo se registra el rol. \\
+RF-03 & Consultar, modificar y desactivar usuarios & Pendiente &
+Consultar y modificar ya están en RF-02. Falta la opción de desactivar. \\
+RF-04 & Registrar y modificar asignaturas & Reemplazado &
+Las asignaturas se reemplazan por periodos, categorías documentales y carreras (RF-01 y
+RF-02). \\
+RF-05 & Cargar archivos de tutorías & En desarrollo & Cubierto por RF-03. \\
+RF-06 & Clasificar cada recurso & En desarrollo &
+Cubierto por RF-03. Ahora se clasifica por periodo, categoría y carrera, no por asignatura
+y tema. \\
+RF-07 & Buscar recursos por palabra clave & Pendiente &
+RF-03 filtra por periodo, categoría y carrera, pero no por palabra clave. \\
+RF-08 & Visualizar recursos sin descargarlos & En desarrollo & Cubierto por RF-03. \\
+RF-09 & Descargar recursos & En desarrollo & Cubierto por RF-03. \\
+RF-10 & Editar los datos de los recursos & En desarrollo & Cubierto por RF-03. \\
+RF-11 & Eliminar recursos & En desarrollo & Cubierto por RF-03. \\
+RF-12 & Restringir operaciones según el rol & Pendiente &
+Depende del inicio de sesión, que se deja para una versión posterior. \\
+RF-13 & Detectar archivos repetidos & Pendiente & No se implementó en esta versión. \\
+\addlinespace
+RNF-01 & Cierre automático de sesión & Pendiente & Depende del inicio de sesión. \\
+RNF-02 & Contraseñas cifradas & Pendiente & Depende del inicio de sesión. \\
+RNF-03 & Rendimiento con volumen alto & En desarrollo &
+Las tablas tienen índices en las llaves foráneas y en los campos de filtro. Falta la prueba
+con datos masivos, a cargo de Roselyn. \\
+RNF-04 & Copias de seguridad periódicas & Pendiente & No se implementó en esta versión. \\
+RNF-05 & Integridad con claves y restricciones & Completado &
+Llaves foráneas con \texttt{ON DELETE RESTRICT} y restricciones únicas y de verificación.
+Prueba: \ev{RF02\_error\_eliminar\_facultad.png}. \\
+RNF-06 & Usabilidad para el estudiante & Pendiente &
+El estudiante ya no es un actor del sistema; la prueba de usabilidad no se hizo. \\
+\bottomrule
+\end{longtable}
+\endgroup
