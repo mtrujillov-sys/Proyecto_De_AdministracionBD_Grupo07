@@ -1,0 +1,60 @@
+@model RepositorioTutorias.Models.PeriodoForm
+<form method="post">
+    <input type="hidden" asp-for="IdPeriodo" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label">Nombre (ej. 2026-2027 CI)</label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label asp-for="FechaInicio" class="form-label">Fecha de inicio</label>
+            <input asp-for="FechaInicio" class="form-control" />
+            <span asp-validation-for="FechaInicio" class="text-danger"></span>
+        </div>
+        <div class="col">
+            <label asp-for="FechaFin" class="form-label">Fecha de fin</label>
+            <input asp-for="FechaFin" class="form-control" />
+            <span asp-validation-for="FechaFin" class="text-danger"></span>
+        </div>
+    </div>
+
+    @if (Model.IdPeriodo > 0)
+    {
+        <div class="mb-3">
+            <label asp-for="Estado" class="form-label">Estado</label>
+            <select asp-for="Estado" class="form-select">
+                <option value="ACTIVO">ACTIVO</option>
+                <option value="CERRADO">CERRADO</option>
+            </select>
+        </div>
+    }
+    else
+    {
+        <input type="hidden" asp-for="Estado" />
+    }
+
+    <h5>Categorias documentales del periodo</h5>
+    <p class="text-muted">Marca las que quieres reutilizar y desmarca las que ya no se usan.</p>
+    @foreach (var c in Model.CategoriasDisponibles)
+    {
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="CategoriasSeleccionadas" value="@c.IdCategoria" id="cat@(c.IdCategoria)" @(Model.CategoriasSeleccionadas.Contains(c.IdCategoria) ? "checked" : "") />
+            <label class="form-check-label" for="cat@(c.IdCategoria)">
+                @c.Nombre
+                @if (c.UsadaEn != "") { <small class="text-muted">(usada en: @c.UsadaEn)</small> }
+            </label>
+        </div>
+    }
+
+    <div class="mb-3 mt-3">
+        <label asp-for="NuevasCategorias" class="form-label">Categorias nuevas (separadas por coma)</label>
+        <input asp-for="NuevasCategorias" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-link" asp-action="Index">Cancelar</a>
+</form>
