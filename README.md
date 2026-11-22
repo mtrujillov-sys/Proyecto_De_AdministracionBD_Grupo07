@@ -87,7 +87,6 @@ Abrir la dirección que muestra la consola (por defecto http://localhost:5093).
 | RF-02 | Facultades, carreras y usuarios | /Facultades, /Carreras y /Usuarios | Kamila |
 | RF-03 | Documentos (subir y consultar) | /Documentos | Mayummy |
 
-Prueba de conexión con la base: /Prueba/Roles
 
 ## Estructura del proyecto
 
