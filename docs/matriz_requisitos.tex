@@ -32,8 +32,7 @@ cada uno y cuál módulo lo cubre. Los estados son completado, en desarrollo o p
 \endhead
 RF-01 & Periodos y categorías documentales & Completado &
 CRUD de periodos y de categorías, con reutilización de categorías de periodos anteriores
-al crear un periodo nuevo y validaciones de nombre y de fechas. Falta la prueba de no
-eliminar una categoría con documentos, que depende de RF-03. &
+al crear un periodo nuevo y validaciones de nombre y de fechas. &
 16 capturas \ev{RF01\_*.png} en \texttt{evidencias/}; por ejemplo
 \ev{RF01\_crear\_periodo.png}, \ev{RF01\_fechas\_error.png} y
 \ev{RF01\_reutilizar\_categorias.png}. \\
@@ -41,8 +40,7 @@ eliminar una categoría con documentos, que depende de RF-03. &
 RF-02 & Facultades, carreras y usuarios & Completado &
 CRUD de facultades, carreras (con facultad) y usuarios (con rol y carrera). Validaciones de
 nombre único, correo válido y único, carrera obligatoria salvo para el administrador
-general y bloqueo al eliminar una facultad con carreras. Falta la prueba de no eliminar un
-usuario con documentos, que depende de RF-03. &
+general y bloqueo al eliminar una facultad con carreras o un usuario con documentos. &
 Tabla~\ref{tab:pruebas-rf02}: 6 pruebas y 11 capturas \ev{RF02\_*.png} en
 \texttt{evidencias/}. \\
 \addlinespace
@@ -103,9 +101,11 @@ RF-13 & Detectar archivos repetidos & Pendiente & No se implementó en esta vers
 \addlinespace
 RNF-01 & Cierre automático de sesión & Pendiente & Depende del inicio de sesión. \\
 RNF-02 & Contraseñas cifradas & Pendiente & Depende del inicio de sesión. \\
-RNF-03 & Rendimiento con volumen alto & En desarrollo &
-Las tablas tienen índices en las llaves foráneas y en los campos de filtro. Falta la prueba
-con datos masivos, a cargo de Roselyn. \\
+RNF-03 & Rendimiento con volumen alto & Completado &
+Las tablas tienen índices en las llaves foráneas y en los campos de filtro. Se probó con
+200\,000 documentos: con índices, las consultas con filtro tardaron entre 3.1 y 14.5 ms
+(sección de rendimiento). No se probó con millones de registros ni con búsqueda por palabra
+clave. \\
 RNF-04 & Copias de seguridad periódicas & Pendiente & No se implementó en esta versión. \\
 RNF-05 & Integridad con claves y restricciones & Completado &
 Llaves foráneas con \texttt{ON DELETE RESTRICT} y restricciones únicas y de verificación.
