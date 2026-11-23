@@ -146,7 +146,7 @@ carrera de la institución pueda usarla con su propia información.
 
 \section{Stakeholders}
 
-La Tabla~\ref{tab:stakeholders} indica quiénes tienen interés en la plataforma o se ven
+El Cuadro~\ref{tab:stakeholders} indica quiénes tienen interés en la plataforma o se ven
 afectados por ella, y cuál es su relación con el sistema. Los tutores son quienes suben
 los documentos; los demás roles organizan, consultan o evalúan.
 
@@ -170,8 +170,7 @@ Da seguimiento a los documentos de su carrera. Consulta lo que entregaron los tu
 filtrando por periodo y categoría. \\
 \addlinespace
 Coordinador de área &
-Apoya las operaciones de la aplicación junto con el administrador general y consulta
-los documentos de las carreras que le corresponden. \\
+Revisa los documentos de las carreras de su área. \\
 \addlinespace
 Tutores &
 Son quienes suben los documentos. Eligen el periodo y la categoría, escriben el título
@@ -230,7 +229,7 @@ años de correos.
 
 La primera versión de la aplicación es una aplicación web en C\# con ASP.NET Core MVC
 y PostgreSQL como gestor de base de datos, donde se almacena toda la información. Incluye
-tres módulos de prioridad alta (Tabla~\ref{tab:modulos}):
+tres módulos de prioridad alta (Cuadro~\ref{tab:modulos}):
 
 \begin{longtable}{>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}p{11.3cm}}
 \caption{Módulos incluidos en la primera versión}\label{tab:modulos}\\
@@ -285,7 +284,7 @@ masivos para comprobar el rendimiento del diseño.
 \subsection{Cambios respecto a la propuesta inicial}
 
 Después de la propuesta de la semana 2 el docente precisó cómo debe funcionar la
-plataforma. Por eso se ajustó la propuesta inicial. La Tabla~\ref{tab:cambios} resume
+plataforma. Por eso se ajustó la propuesta inicial. El Cuadro~\ref{tab:cambios} resume
 los cambios y su motivo.
 
 \begingroup\small
@@ -616,6 +615,115 @@ Las pruebas de rendimiento se hicieron con 200{,}000 documentos y no con millone
 \item \textbf{Coordinador de área:} revisa los documentos de las carreras de su área.
 \item \textbf{Tutor:} sube y consulta los documentos de tutoría de su carrera.
 \end{itemize}
+
+% ---------------------- MATRIZ DE REQUISITOS ----------------------
+\section{Matriz de requisitos consolidada}
+
+La matriz recoge el estado de los requisitos al cierre de esta entrega. Se presenta en dos
+partes. El Cuadro~\ref{tab:matriz-equipo} muestra los tres módulos que implementó el equipo,
+con su numeración RF-01, RF-02 y RF-03. El Cuadro~\ref{tab:matriz-sem2} recorre los
+requisitos de la propuesta de la semana 2, que usaban otra numeración, e indica el estado de
+cada uno y cuál módulo lo cubre. Los estados son completado, en desarrollo o pendiente.
+
+\subsection{Módulos implementados por el equipo}
+
+\begingroup\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{3.9cm}}
+\caption{Estado de los módulos implementados (RF-01 a RF-03)}\label{tab:matriz-equipo}\\
+\toprule
+\textbf{ID} & \textbf{Requisito} & \textbf{Estado} & \textbf{Funcionalidad} & \textbf{Evidencia} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Requisito} & \textbf{Estado} & \textbf{Funcionalidad} & \textbf{Evidencia} \\
+\midrule
+\endhead
+RF-01 & Periodos y categorías documentales & Completado &
+CRUD de periodos y de categorías, con reutilización de categorías de periodos anteriores
+al crear un periodo nuevo y validaciones de nombre y de fechas. &
+16 capturas \ev{RF01\_*.png} en \texttt{evidencias/}; por ejemplo
+\ev{RF01\_crear\_periodo.png}, \ev{RF01\_fechas\_error.png} y
+\ev{RF01\_reutilizar\_categorias.png}. \\
+\addlinespace
+RF-02 & Facultades, carreras y usuarios & Completado &
+CRUD de facultades, carreras (con facultad) y usuarios (con rol y carrera). Validaciones de
+nombre único, correo válido y único, carrera obligatoria salvo para el administrador
+general y bloqueo al eliminar una facultad con carreras o un usuario con documentos. &
+Cuadro~\ref{tab:pruebas-rf02}: 6 pruebas y 11 capturas \ev{RF02\_*.png} en
+\texttt{evidencias/}. \\
+\addlinespace
+RF-03 & Documentos: subir y consultar & Completado &
+Subir documentos en PDF o DOCX, consultarlos con filtros por periodo, categoría y carrera
+con paginación, editar, eliminar y abrir el archivo desde la lista. Validaciones de tipo de
+archivo, tamaño máximo, periodo abierto y categoría habilitada para el periodo. &
+4 pruebas con 6 capturas \ev{RF03\_*.png} en \texttt{evidencias/}; por ejemplo
+\ev{RF03\_subir\_documento.png} y \ev{RF03\_error\_archivo\_no\_permitido.png}. \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection{Requisitos de la propuesta de la semana 2}
+
+Los identificadores de esta tabla son los del informe de la semana 2 y no corresponden a
+RF-01, RF-02 ni RF-03 de los módulos anteriores.
+
+\begingroup\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{4.6cm}>{\raggedright\arraybackslash}p{1.9cm}>{\raggedright\arraybackslash}p{7.0cm}}
+\caption{Estado de los requisitos de la propuesta de la semana 2}\label{tab:matriz-sem2}\\
+\toprule
+\textbf{ID} & \textbf{Requisito} & \textbf{Estado} & \textbf{Cobertura u observación} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Requisito} & \textbf{Estado} & \textbf{Cobertura u observación} \\
+\midrule
+\endhead
+RF-01 & Registrar usuarios y asignarles un rol & Completado &
+Cubierto por RF-02. Ahora son cuatro roles (administrador general, coordinador de carrera,
+coordinador de área y tutor). \\
+RF-02 & Iniciar sesión con usuario y contraseña & Pendiente &
+Se deja para una versión posterior. Por ahora solo se registra el rol. \\
+RF-03 & Consultar, modificar y desactivar usuarios & Pendiente &
+Consultar y modificar ya están en RF-02. Falta la opción de desactivar. \\
+RF-04 & Registrar y modificar asignaturas & Reemplazado &
+Las asignaturas se reemplazan por periodos, categorías documentales y carreras (RF-01 y
+RF-02). \\
+RF-05 & Cargar archivos de tutorías & Completado & Cubierto por RF-03. \\
+RF-06 & Clasificar cada recurso & Completado &
+Cubierto por RF-03. Ahora se clasifica por periodo, categoría y carrera, no por asignatura
+y tema. \\
+RF-07 & Buscar recursos por palabra clave & Pendiente &
+RF-03 filtra por periodo, categoría y carrera, pero no por palabra clave. \\
+RF-08 & Visualizar recursos sin descargarlos & Completado &
+Cubierto por RF-03. Desde la lista, el PDF se abre en una pestaña nueva. \\
+RF-09 & Descargar recursos & Completado &
+Cubierto por RF-03. El archivo se obtiene desde su enlace en la lista. \\
+RF-10 & Editar los datos de los recursos & Completado &
+Cubierto por RF-03. Prueba: \ev{RF03\_editar\_documento.png}. \\
+RF-11 & Eliminar recursos & Completado &
+Cubierto por RF-03. Pide confirmación y elimina también el archivo guardado. \\
+RF-12 & Restringir operaciones según el rol & Pendiente &
+Depende del inicio de sesión, que se deja para una versión posterior. \\
+RF-13 & Detectar archivos repetidos & Pendiente & No se implementó en esta versión. \\
+\addlinespace
+RNF-01 & Cierre automático de sesión & Pendiente & Depende del inicio de sesión. \\
+RNF-02 & Contraseñas cifradas & Pendiente & Depende del inicio de sesión. \\
+RNF-03 & Rendimiento con volumen alto & Completado &
+Las tablas tienen índices en las llaves foráneas y en los campos de filtro. Se probó con
+200\,000 documentos: con índices, las consultas con filtro tardaron entre 3.1 y 14.5 ms
+(sección de rendimiento). No se probó con millones de registros ni con búsqueda por palabra
+clave. \\
+RNF-04 & Copias de seguridad periódicas & Pendiente & No se implementó en esta versión. \\
+RNF-05 & Integridad con claves y restricciones & Completado &
+Llaves foráneas con \texttt{ON DELETE RESTRICT} y restricciones únicas y de verificación.
+Prueba: \ev{RF02\_error\_eliminar\_facultad.png}. \\
+RNF-06 & Usabilidad para el estudiante & Pendiente &
+El estudiante ya no es un actor del sistema; la prueba de usabilidad no se hizo. \\
+\bottomrule
+\end{longtable}
+\endgroup
 
 \section{Conclusiones}
 \begin{enumerate}[leftmargin=1.8em]
