@@ -367,7 +367,9 @@ RF-01 & Crear periodo con categorías & Nombre, fechas, estado ACTIVO y una cate
 \addlinespace
 RF-01 & Categoría ya existente & Nombre de una categoría ya registrada & Se reutiliza la categoría, sin error ni duplicado & Categoría reutilizada mediante \texttt{ON CONFLICT} & \ev{RF01\_reutilizar\_categorias.png}\newline\ev{RF01\_reutilizar\_categorias\_postgres.png}\\
 \addlinespace
-RF-01 & Eliminar categoría en uso & Categoría habilitada en un periodo & No se elimina y se muestra un mensaje claro & Mensaje de que la categoría está en uso & \ev{RF01\_categoria\_eliminar.png}\\
+RF-01 & Eliminar categoría & Categoría que no está en uso & Se elimina con el mensaje <<Categoria eliminada>> & Se eliminó y apareció el mensaje & \ev{RF01\_categoria\_eliminar.png}\\
+\addlinespace
+RF-01 & Fechas inválidas & Fecha de fin anterior a la fecha de inicio & Mensaje de error y no se guarda & Mostró <<La fecha de fin debe ser posterior a la fecha de inicio>> y no guardó & \ev{RF01\_fechas\_error.png}\\
 \bottomrule
 \end{tabularx}
 \end{table}
