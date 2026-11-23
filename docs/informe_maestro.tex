@@ -35,7 +35,7 @@
 \definecolor{codigo}{HTML}{F7F9FC}
 % =================== DATOS EDITABLES ===================
 \newcommand{\universidad}{UNIVERSIDAD TÉCNICA ESTATAL DE QUEVEDO}
-\newcommand{\facultad}{FACULTAD DE CIENCIAS DE LA COMPUTACIÓN}
+\newcommand{\facultad}{FACULTAD DE CIENCIAS DE LA COMPUTACIÓN Y DISEÑOS DIGITALES}
 \newcommand{\carrera}{CARRERA DE INGENIERÍA DE SOFTWARE}
 \newcommand{\materia}{Administración de Base de Datos}
 \newcommand{\tema}{Informe final: Repositorio de Tutorías}
@@ -170,7 +170,7 @@ Da seguimiento a los documentos de su carrera. Consulta lo que entregaron los tu
 filtrando por periodo y categoría. \\
 \addlinespace
 Coordinador de área &
-Revisa los documentos de las carreras de su área. \\
+Revisa los documentos de las carreras de su área y apoya al administrador general en las operaciones de la aplicación. \\
 \addlinespace
 Tutores &
 Son quienes suben los documentos. Eligen el periodo y la categoría, escriben el título
@@ -599,6 +599,9 @@ Las pruebas de rendimiento se hicieron con 200{,}000 documentos y no con millone
 \item No hay versionado ni búsqueda por el contenido de los documentos.
 \item Un periodo CERRADO no recibe documentos nuevos.
 \item El rendimiento se probó con 200{,}000 documentos y no con millones de registros.
+\item \textbf{Tiempo:} el proyecto se desarrolló en un semestre y con entregas semanales, por lo que se priorizaron los tres módulos principales y la seguridad (inicio de sesión) se dejó para una versión posterior.
+\item \textbf{Costo:} se usaron herramientas gratuitas (PostgreSQL, Docker, GitHub y Overleaf), sin presupuesto para servidores, almacenamiento en la nube ni servicios de pago.
+\item \textbf{Recursos:} las pruebas se hicieron en computadoras personales de las integrantes, no en un servidor de producción, y el equipo es de tres personas, con un módulo por integrante.
 \end{itemize}
 
 \section{Riesgos}
@@ -620,10 +623,10 @@ Las pruebas de rendimiento se hicieron con 200{,}000 documentos y no con millone
 
 \section{Roles de usuario}
 \begin{itemize}[leftmargin=1.8em,itemsep=3pt]
-\item \textbf{Administrador general:} administra facultades, carreras, usuarios, periodos y categorías documentales.
-\item \textbf{Coordinador de carrera:} da seguimiento a los documentos y tutores de su carrera.
-\item \textbf{Coordinador de área:} revisa los documentos de las carreras de su área.
-\item \textbf{Tutor:} sube y consulta los documentos de tutoría de su carrera.
+\item \textbf{Administrador general:} administra facultades, carreras, usuarios, periodos y categorías documentales, y define qué documentos se piden en cada semestre. No pertenece a una sola carrera.
+\item \textbf{Coordinador de carrera:} da seguimiento a los documentos y tutores de su carrera, consultando por periodo y categoría para verificar qué entregó cada tutor.
+\item \textbf{Coordinador de área:} revisa los documentos de las carreras de su área y apoya al administrador general en las operaciones de la aplicación.
+\item \textbf{Tutor:} sube los documentos de tutoría (plan de acción inicial, informe de corte e informe final), los edita y los consulta dentro de su carrera.
 \end{itemize}
 
 % ---------------------- MATRIZ DE REQUISITOS ----------------------
