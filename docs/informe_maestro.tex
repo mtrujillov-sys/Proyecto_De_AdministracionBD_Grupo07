@@ -441,6 +441,13 @@ Nombres: Tutor Sin Carrera; correo: tutor3@uteq.edu.ec; rol: tutor; sin carrera.
 No se guarda y se muestra ``Solo el administrador general puede no tener carrera''. &
 El sistema rechazó el registro y mostró el mensaje bajo el campo Carrera. &
 \ev{RF02\_error\_tutor\_sin\_carrera.png} \\
+\addlinespace
+RF-02 & Error: eliminar usuario con documentos &
+Tutor Prueba Uno, que tiene 1 documento asociado (Informe de prueba, PDF). &
+No se elimina y se muestra ``No se puede eliminar: el usuario tiene documentos asociados''. &
+El sistema mostró el mensaje y el usuario siguió en la lista. En PostgreSQL, el tutor sigue con 1 documento. &
+\ev{RF02\_error\_eliminar\_usuario\_con\_documentos.png}\newline
+\ev{RF02\_error\_eliminar\_usuario\_con\_documentos\_sql.png} \\
 \bottomrule
 \end{longtable}
 \endgroup
@@ -459,6 +466,9 @@ Las consultas usadas para comprobar los datos en PostgreSQL fueron:
   \item \ev{SELECT f.id\_facultad, f.nombre, COUNT(c.id\_carrera) AS carreras FROM
         facultad f LEFT JOIN carrera c ON c.id\_facultad = f.id\_facultad GROUP BY
         f.id\_facultad, f.nombre;}
+  \item \ev{SELECT u.id\_usuario, u.nombres, COUNT(d.id\_documento) AS documentos FROM
+        usuario u LEFT JOIN documento d ON d.id\_usuario = u.id\_usuario GROUP BY
+        u.id\_usuario, u.nombres;}
 \end{itemize}
 \endgroup
 
@@ -650,7 +660,7 @@ RF-02 & Facultades, carreras y usuarios & Completado &
 CRUD de facultades, carreras (con facultad) y usuarios (con rol y carrera). Validaciones de
 nombre único, correo válido y único, carrera obligatoria salvo para el administrador
 general y bloqueo al eliminar una facultad con carreras o un usuario con documentos. &
-Cuadro~\ref{tab:pruebas-rf02}: 6 pruebas y 11 capturas \ev{RF02\_*.png} en
+Cuadro~\ref{tab:pruebas-rf02}: 7 pruebas y 13 capturas \ev{RF02\_*.png} en
 \texttt{evidencias/}. \\
 \addlinespace
 RF-03 & Documentos: subir y consultar & Completado &
